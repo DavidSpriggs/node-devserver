@@ -1,4 +1,4 @@
-// Dev Server with proxy by David Spriggs
+// Dev Server with proxy page by David Spriggs
 
 var express = require('express');
 var proxypage = require('proxypage');
@@ -9,10 +9,16 @@ app.set('port', 3000);
 app.use(express.logger('dev'));
 app.use(express.errorHandler());
 app.use(express.bodyParser());
-app.use(express.directory('public'));
-app.use(express.static('public'));
+
+//get folder path to server from command line args, if not present use relative folder called public:
+var wwwRoot = 'public';
+if (process.argv[2]) {
+	wwwRoot = process.argv[2];
+}
 
 app.all('/proxy/proxy.ashx', proxypage.proxy);
+app.use(express.directory(wwwRoot));
+app.use(express.static(wwwRoot));
 
 app.listen(app.get('port'), function() {
 	console.log('Dev server listening on port ' + app.get('port'));
