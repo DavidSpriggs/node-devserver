@@ -45,6 +45,7 @@ if (process.argv[2]) {
 	wwwRoot = process.argv[2];
 }
 
+// mimic an .aspx proxy page:
 app.all('/proxy/proxy.ashx', proxypage.proxy);
 app.use(express.directory(wwwRoot));
 app.use(express.static(wwwRoot));
