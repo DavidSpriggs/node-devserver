@@ -5,7 +5,7 @@ var proxypage = require('proxypage');
 
 var app = express();
 
-app.set('port', 3000);
+app.set('port', process.argv[3] || 3000);
 app.use(express.logger('dev'));
 app.use(express.errorHandler());
 app.use(express.bodyParser());
