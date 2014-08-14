@@ -26,6 +26,11 @@ Or the default public folder:
 ```
 node server.js
 ```
+To listen on a different port (default 3000):
+```
+  node server.js ../ConfigurableViewerJSAPI/viewer/ 8181
+```
+Note: If specifying a different port the server folder must be specified.
 
 ## Sample:
 ```javascript
@@ -34,7 +39,7 @@ var proxypage = require('proxypage');
 
 var app = express();
 
-app.set('port', 3000);
+app.set('port', process.argv[3] || 3000);
 app.use(express.logger('dev'));
 app.use(express.errorHandler());
 app.use(express.bodyParser());
